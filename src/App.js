@@ -6,6 +6,8 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [students, setStudents] = useState([]);
+  const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState([])
 
 
   useEffect(() => {
@@ -23,6 +25,15 @@ function App() {
       )
   }, [])
 
+  useEffect(() => {
+    setFilter(
+      students.filter(s => {
+        return s.firstName.toLowerCase().includes(search.toLowerCase())
+          || s.lastName.toLowerCase().includes(search.toLowerCase());
+      })
+    )
+  }, [search, students]);
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
@@ -32,7 +43,15 @@ function App() {
       <div className="main">
 
         <ul className="list">
-          {students.map(student => (
+        <form >
+            <input
+              type="text"
+              placeholder="Search by name"
+              id="name-input"
+              onChange={e => setSearch(e.target.value)}
+            />
+          </form>
+          {filter.map(student => (
             <li className="student" key={student.id}>
               <img src={student.pic} alt="student"></img>
               <div className="student-info">
