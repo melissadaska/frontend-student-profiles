@@ -8,6 +8,7 @@ function App() {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState([])
+  const [expand, setExpand] = useState([])
 
 
   useEffect(() => {
@@ -27,12 +28,22 @@ function App() {
 
   useEffect(() => {
     setFilter(
-      students.filter(s => {
-        return s.firstName.toLowerCase().includes(search.toLowerCase())
-          || s.lastName.toLowerCase().includes(search.toLowerCase());
+      students.filter(student => {
+        return student.firstName.toLowerCase().includes(search.toLowerCase())
+          || student.lastName.toLowerCase().includes(search.toLowerCase());
       })
     )
   }, [search, students]);
+
+  const toggleExpand = (id) => {
+    if (expand.includes(id)) {
+      setExpand(expand.filter(studentid => studentid !== id))
+    } else {
+      let newExpand = [...expand]
+      newExpand.push(id)
+      setExpand(newExpand)
+    }
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -62,7 +73,12 @@ function App() {
                 <p>Average: {(student.grades.reduce((a, b) => parseInt(b) + a, 0))
                   / (student.grades.map((grade) => grade).length)}%
                 </p>
+                {expand.includes(student.id) ? (
+                  <ul className="grades">
+                    {student.grades.map((grade, index) => <li key={grade.id}>Test {index + 1}: {grade}%</li>)}
+                  </ul>) : null}
               </div>
+              <button className="expand-btn" onClick={() => toggleExpand(student.id)}>{expand.includes(student.id) ? '-' : '+'}</button>
             </li>
           ))
           }
