@@ -29,11 +29,11 @@ function App() {
     return <div>Loading...</div>;
   } else {
     return (
-      <div className="main-container">
+      <div className="main">
 
-        <ul className="list-container">
+        <ul className="list">
           {students.map(student => (
-            <li className="student-container" key={student.id}>
+            <li className="student" key={student.id}>
               <img src={student.pic} alt="student"></img>
               <div className="student-info">
                 <h1>{student.firstName}  {student.lastName}</h1>
