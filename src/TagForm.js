@@ -11,17 +11,19 @@ const TagsForm = props => {
       }
   };
   return (
-      <div className="tags-input">
-          <ul>
-              {tags.map((tag, index) => (
-                  <li key={index}>
-                      <span>{tag}</span>
-                      <i className="material-icons"
-                      ></i>
-                  </li>
-              ))}
-          </ul>
-          <input
+      <div className="tags">
+          <div className="tag-list">
+            <ul>
+                {tags.map((tag, index) => (
+                    <li key={index}>
+                        <div className="tag">{tag}</div>
+                        <i className="material-icons"
+                        ></i>
+                    </li>
+                ))}
+            </ul>
+          </div>
+          <input className="tagsInput"
               type="text"
               onKeyUp={event => addTags(event)}
               placeholder="Add a tag"

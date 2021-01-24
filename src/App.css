@@ -16,6 +16,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
+  padding: 20px;
 }
 
 h1 {
@@ -39,7 +40,7 @@ p {
   padding-left: 30px;
 }
 
-#name-input #tag-input {
+.name {
   width: 97%;
   padding: 5px;
   margin: 10px;
@@ -65,4 +66,29 @@ p {
   color: gray;
 
 }
+
+.tagsInput {
+  border: none;
+  border-bottom: solid 2px gray;
+  margin-left: 1.5em;
+  margin-top: 15px;
+  padding: 5px;
+  padding-right: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.tag {
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+
+
+
 

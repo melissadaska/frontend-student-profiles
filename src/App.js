@@ -10,7 +10,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState([]);
   const [expand, setExpand] = useState([]);
-  // const [tag, searchTag] = useState([]);
+  const [tag, searchTag] = useState(['']);
 
   const selectedTags = (tags) => console.log(tags);
 
@@ -39,13 +39,14 @@ function App() {
     )
   }, [search, students]);
 
-  // useEffect(() => {
-  //   setFilter(
-  //     students.filter(student => {
-  //       return student.tag.includes(tag)
-  //     })
-  //   )
-  // }, [tag, students]);
+  useEffect(() => {
+    setFilter(
+      students.filter(student => {
+        return student.firstName.toLowerCase().includes(tag)
+          || student.lastName.toLowerCase().includes(tag);
+      })
+    )
+  }, [tag, students]);
 
   const toggleExpand = (id) => {
     if (expand.includes(id)) {
@@ -67,22 +68,14 @@ function App() {
 
         <ul className="list">
         <form >
-            <input
+            <input className="name" 
               type="text"
               placeholder="Search by name"
               id="name-input"
               onChange={e => setSearch(e.target.value)}
             />
         </form>
-        {/* <form >
-            <input
-              type="text"
-              placeholder="Search by tag"
-              id="tag-input"
-              onChange={e => searchTag(e.target.value)}
-            />
-        </form> */}
-
+        
           {filter.map(student => (
             <li className="student" key={student.id}>
               <img src={student.pic} alt="student"></img>
@@ -95,32 +88,12 @@ function App() {
                   / (student.grades.map((grade) => grade).length)}%
                 </p>
 
-                {/* <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    addTag(tag);
-                    setTag("");
-                  }}
-                >
-                  <input
-                    className="form"
-                    placeholder="Add a tag"
-                    type="text"
-                    value={tag}
-                    onChange={(e) => {
-                      e.preventDefault();
-                      setTag(e.target.value);
-                    }}
-                  />
-                  <input type="submit" className="tag-submit" />
-                </form> */}
-
-                <TagForm selectedTags={selectedTags}/>
-
                 {expand.includes(student.id) ? (
                   <ul className="grades">
                     {student.grades.map((grade, index) => <li key={grade.id}>Test {index + 1}: {grade}%</li>)}
                   </ul>) : null}
+
+                  <TagForm selectedTags={selectedTags}/>
               </div>
               <button className="expand-btn" onClick={() => toggleExpand(student.id)}>{expand.includes(student.id) ? '-' : '+'}</button>
             </li>
