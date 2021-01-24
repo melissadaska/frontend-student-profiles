@@ -2,8 +2,8 @@
 
 <p align='center'>
     <img src="src/assets/viewstudents.png" alt="students"/>
-    <img src="/assets/filterbyname.png" alt="filter"/>
-    <img src="/assets/addtags.png" alt="tags"/>
+    <img src="src/assets/filterbyname.png" alt="filter"/>
+    <img src="src/assets/addtags.png" alt="tags"/>
 </p>  
 
 ## Table of Contents
